@@ -100,6 +100,12 @@ public class Principal extends javax.swing.JFrame {
         btnNuevo = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jPanel6 = new javax.swing.JPanel();
+        txtCedula1 = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Principal");
@@ -690,6 +696,67 @@ public class Principal extends javax.swing.JFrame {
 
         tabbed.addTab("Consultar Movimientos", jPanel5);
 
+        txtCedula1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCedula1KeyTyped(evt);
+            }
+        });
+
+        jLabel15.setText("Cedula/RUC:");
+
+        jButton1.setText("Calcular");
+        jButton1.setActionCommand("");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "MES", "SALDO INI", "INTEREZ", "AMORTIZACION", "PAGO", "SALDO FINAL"
+            }
+        ));
+        jScrollPane6.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addGap(39, 39, 39)
+                        .addComponent(txtCedula1, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(txtCedula1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        tabbed.addTab("Simulador Prestamos", jPanel6);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -710,228 +777,152 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyTyped
-        final char caracter = evt.getKeyChar();
-        String ced = txtCedula.getText();
-        if(((caracter < '0') || (caracter > '9')) && (caracter != '\b') || ced.length() >= 13) {
-           evt.consume();
-        }
-    }//GEN-LAST:event_txtCedulaKeyTyped
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        txtCedMovCon.setText("");
+        cmbCuentasCon.removeAllItems();
+        final DefaultTableModel modelo = (DefaultTableModel) tabConMov.getModel();
+        modelo.setRowCount(0);
+    }//GEN-LAST:event_btnNuevoActionPerformed
 
-    private void rbtCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtCrearActionPerformed
-        if(rbtCrear.isSelected()) {
-            rbtBuscar.setSelected(false);
-            btnBuscar.setEnabled(false);
-            btnCrear.setEnabled(true);
-            txtNombre.setEnabled(true);
-        }
-        else {
-            rbtBuscar.setSelected(true);
-            btnCrear.setEnabled(false);
-            btnBuscar.setEnabled(true);
-            txtNombre.setEnabled(false);
-            txtNombre.setText("");
-        }
-    }//GEN-LAST:event_rbtCrearActionPerformed
-
-    private void rbtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtBuscarActionPerformed
-        if(rbtBuscar.isSelected()) {
-            rbtCrear.setSelected(false);
-            btnCrear.setEnabled(false);
-            btnBuscar.setEnabled(true);
-            txtNombre.setEnabled(false);
-            txtNombre.setText("");
-        }
-        else {
-            rbtCrear.setSelected(true);
-            btnBuscar.setEnabled(false);
-            btnCrear.setEnabled(true);
-            txtNombre.setEnabled(true);
-        }
-    }//GEN-LAST:event_rbtBuscarActionPerformed
-
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        // TODO add your handling code here:
-        txtNombre.setText("");
-        txtCedula.setText("");
-    }//GEN-LAST:event_btnLimparActionPerformed
-
-    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        client = new Cliente(txtCedula.getText(), txtNombre.getText());
-        if(txtCedula.getText().equals("") || txtNombre.getText().equals("")){
-            JOptionPane.showMessageDialog(rootPane, "Ingrese los datos Completos");
-        }
-        else {
-            if(validarRuc(txtCedula.getText()) || validacionRUC(txtCedula.getText())) {
-                if(client.ingresarCliente(client) > 0){
-                    JOptionPane.showMessageDialog(rootPane, "Se guardo exitosamente");
-                }
-                else {
-                    JOptionPane.showMessageDialog(rootPane, "Ha ocurrido un error, intente nuevamente");
+    private void btnBuscarMovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMovActionPerformed
+        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        move = new Movimiento();
+        ArrayList<Movimiento> moveArray = new ArrayList<Movimiento>();
+        final Date dateStart = jDateChooser1.getDate();
+        final Date dateEnd = jDateChooser2.getDate();
+        if(!txtCedMovCon.getText().equals("") || !cmbCuentasCon.getSelectedItem().equals("")) {
+            String start = format.format(dateStart);
+            String end = format.format(dateEnd);
+            if(dateStart.before(dateEnd)) {
+                moveArray = move.buscarMovimientoFecha(cmbCuentasCon.getSelectedItem().toString(), dateStart, dateEnd);
+                final DefaultTableModel modelo = (DefaultTableModel) tabConMov.getModel();
+                modelo.setRowCount(0);
+                for (int i = 0; i < moveArray.size(); i++) {
+                    Object[] fila = new Object[6];
+                    final Movimiento move = moveArray.get(i);
+                    fila[0] = move.getCodMovimiento();
+                    fila[1] = move.getCuenta();
+                    fila[2] = move.getTipo();
+                    fila[3] = move.getFecha();
+                    fila[4] = move.getMonto();
+                    fila[5] = move.getSaldo();
+                    modelo.addRow(fila);
                 }
             }
             else {
-                JOptionPane.showMessageDialog(rootPane, "RUC o cedula invalidos");
+                JOptionPane.showMessageDialog(rootPane, "Rango de Fechas invalido");
             }
-            final ArrayList<Cliente> clientArray = client.buscarCliente(txtCedula.getText());
-            final DefaultTableModel modelo = (DefaultTableModel) tabCliente.getModel();
-            modelo.setRowCount(0);
-            for (int i = 0; i < clientArray.size(); i++) {
-                Object[] fila = new Object[2];
-                final Cliente client = clientArray.get(i);
-                fila[0] = client.getCedula();
-                fila[1] = client.getNombre();
-                modelo.addRow(fila);
-            }
-        }
-    }//GEN-LAST:event_btnCrearActionPerformed
-
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        if(validarRuc(txtCedula.getText()) == false && validacionRUC(txtCedula.getText()) == false) {
-            JOptionPane.showMessageDialog(rootPane, "Ingrese la cedula o RUC correctos");
         }
         else {
-            client = new Cliente();
-            final ArrayList<Cliente> clientArray = client.buscarCliente(txtCedula.getText());
-            final DefaultTableModel modelo = (DefaultTableModel) tabCliente.getModel();
-            modelo.setRowCount(0);
-            for (int i = 0; i < clientArray.size(); i++) {
-                Object[] fila = new Object[2];
-                final Cliente client = clientArray.get(i);
-                fila[0] = client.getCedula();
-                fila[1] = client.getNombre();
-                modelo.addRow(fila);
-            }
+            JOptionPane.showMessageDialog(rootPane, "Ingrese datos Correctos");
         }
-    }//GEN-LAST:event_btnBuscarActionPerformed
+    }//GEN-LAST:event_btnBuscarMovActionPerformed
 
-    private void txtCedKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedKeyTyped
-        final char caracter = evt.getKeyChar();
-        final String ced = txtCed.getText();
-        if(((caracter < '0') || (caracter > '9')) && (caracter != '\b') || ced.length() >= 13) {
-           evt.consume();
-        }
-    }//GEN-LAST:event_txtCedKeyTyped
-
-    private void txtSaldoInicialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSaldoInicialKeyTyped
-        final char caracter = evt.getKeyChar();
-        final String ced = txtCedula.getText();
-        if(((caracter < '0') || (caracter > '9')) && (caracter != '\b') && caracter != '.') {
-           evt.consume();
-        }
-    }//GEN-LAST:event_txtSaldoInicialKeyTyped
-
-    private void txtNumCuentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumCuentaKeyTyped
-        final char caracter = evt.getKeyChar();
-        final String ced = txtNumCuenta.getText();
-        if(((caracter < '0') || (caracter > '9')) && (caracter != '\b') || ced.length() >= 8) {
-           evt.consume();
-        }
-    }//GEN-LAST:event_txtNumCuentaKeyTyped
-
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        client = new Cliente();
-        String numCuenta;
-        if(txtCed.getText().equals("") || txtNumCuenta.getText().equals("") || txtSaldoInicial.getText().equals("")
-                || client.buscarClienteN(txtCed.getText())== false) {
-            JOptionPane.showMessageDialog(rootPane, "El cliente no existe o los datos son incompletos");
-        }
-        else {
-            numCuenta = txtNumCuenta.getText();
-            try {
-                if(cmbTipo.getSelectedItem().toString().equals("Ahorros")) {
-                    cuent = new Cuenta(txtNumCuenta.getText(), txtCed.getText(), "aho",
-                            "act", Float.parseFloat(txtSaldoInicial.getText()));
-                }
-                else {
-                    cuent = new Cuenta(txtNumCuenta.getText(), txtCed.getText(), "cor",
-                            "act", Float.parseFloat(txtSaldoInicial.getText()));
-                }
-                if((validarRuc(txtCed.getText()) || validacionRUC(txtCed.getText())) && numCuenta.length() == 8) {
-                    if(cuent.ingresarCu(cuent) > 0) {
-                        JOptionPane.showMessageDialog(rootPane, "Se guardo exitosamente");
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(rootPane, "Ha ocurrido un error, intente nuevamente");
-                    }
-                }
-                else {
-                    JOptionPane.showMessageDialog(rootPane, "RUC, cedula o Numero de Cuenta invalidos");
-                }
-            }
-            catch(Exception e) {
-                JOptionPane.showMessageDialog(rootPane, "Saldo Incorrecto");
-            }
-
-            final ArrayList<Cuenta> cuentArray = cuent.buscarCuenta(txtCed.getText());
-            final DefaultTableModel modelo = (DefaultTableModel) tabCuenta.getModel();
-            modelo.setRowCount(0);
-            for (int i = 0; i < cuentArray.size(); i++) {
-                Object[] fila = new Object[5];
-                final Cuenta cuent = cuentArray.get(i);
-                fila[0] = cuent.getCodCuenta();
-                fila[1] = cuent.getCedula();
-                fila[2] = cuent.getTipo();
-                fila[3] = cuent.getSaldo();
-                fila[4] = cuent.getEstado();
-                modelo.addRow(fila);
-            }
-        }
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
-    private void btnLimpiarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarCuentaActionPerformed
-        txtNumCuenta.setText("");
-        txtCed.setText("");
-        txtSaldoInicial.setText("");
-    }//GEN-LAST:event_btnLimpiarCuentaActionPerformed
-
-    private void txtCedMovKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedMovKeyTyped
+    private void txtCedMovConKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedMovConKeyTyped
         cuent = new Cuenta();
-        cmbCuentas.removeAllItems();
-        char caracter = evt.getKeyChar();
-        final String ced = txtCedMov.getText();
+        cmbCuentasCon.removeAllItems();
+        final char caracter = evt.getKeyChar();
+        final String ced = txtCedMovCon.getText();
         if(((caracter < '0') || (caracter > '9')) && (caracter != '\b') || ced.length() >= 13) {
-           evt.consume();
+            evt.consume();
         }
+
         if(ced.length() == 13 || ced.length() == 10) {
-            ArrayList<Cuenta> aux = new ArrayList<Cuenta>();
-            aux = cuent.buscarCuenta(ced);
-            if(aux.size() > 0) {
-                for(int i = 0; i < aux.size(); i++) {
-                    if(aux.get(i).getEstado().equals("act"))
-                        cmbCuentas.addItem(aux.get(i).getCodCuenta());
+            ArrayList<Cuenta> cuentArray = new ArrayList<Cuenta>();
+            cuentArray = cuent.buscarCuenta(ced);
+            if(cuentArray.size() > 0) {
+                for(int i = 0; i < cuentArray.size(); i++) {
+                    if(cuentArray.get(i).getEstado().equals("act")) {
+                        cmbCuentasCon.addItem(cuentArray.get(i).getCodCuenta());
+                    }
                 }
             }
             else {
                 JOptionPane.showMessageDialog(rootPane, "Cliente no encontrado");
             }
         }
-    }//GEN-LAST:event_txtCedMovKeyTyped
+    }//GEN-LAST:event_txtCedMovConKeyTyped
 
-    private void rbtDebitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtDebitoActionPerformed
-        if(rbtDebito.isSelected()) {
-            rbtCredito.setSelected(false);
+    private void btnDesCuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesCuActionPerformed
+        cuent = new Cuenta();
+        if(!txtCedCu.getText().equals("") && !cmbDesCu.getSelectedItem().toString().equals("")) {
+            if(JOptionPane.showConfirmDialog(rootPane, "Esta seguro que desae desabilitar la cuenta con"
+                + " el numero" + cmbDesCu.getSelectedItem().toString() +", no prodra vovlver a usarla") == 0) {
+            if(cuent.actualizarCuenta(cmbDesCu.getSelectedItem().toString()) > 0) {
+                JOptionPane.showMessageDialog(rootPane, "Se ha desabilitado correctamente");
+            }
+        }
         }
         else {
-            rbtCredito.setSelected(true);
+            JOptionPane.showMessageDialog(rootPane, "Debe seleccionar una cuenta");
         }
-    }//GEN-LAST:event_rbtDebitoActionPerformed
+    }//GEN-LAST:event_btnDesCuActionPerformed
 
-    private void rbtCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtCreditoActionPerformed
-        if(rbtCredito.isSelected()) {
-            rbtDebito.setSelected(false);
+    private void btnCuNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuNuevoActionPerformed
+        txtCedCu.setText("");
+        cmbDesCu.removeAllItems();
+        final DefaultTableModel modelo = (DefaultTableModel) tabCuenta1.getModel();
+        modelo.setRowCount(0);
+    }//GEN-LAST:event_btnCuNuevoActionPerformed
+
+    private void btnCuBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuBuscarActionPerformed
+        cuent = new Cuenta();
+        ArrayList<Cuenta> cuentArray = new ArrayList<Cuenta>();
+        if(!txtCedCu.getText().equals("")) {
+            cuentArray = cuent.buscarCuenta(txtCedCu.getText());
+            if(cuentArray.size() > 0) {
+                DefaultTableModel modelo = (DefaultTableModel) tabCuenta1.getModel();
+                modelo.setRowCount(0);
+                for (int i = 0; i < cuentArray.size(); i++) {
+                    Object[] fila = new Object[5];
+                    final Cuenta cuent = cuentArray.get(i);
+                    fila[0] = cuent.getCodCuenta();
+                    fila[1] = cuent.getCedula();
+                    fila[2] = cuent.getTipo();
+                    fila[3] = cuent.getSaldo();
+                    fila[4] = cuent.getEstado();
+                    modelo.addRow(fila);
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(rootPane, "Cliente no encontrado");
+            }
         }
         else {
-            rbtDebito.setSelected(true);
+            JOptionPane.showMessageDialog(rootPane, "Ingrese una cedula o RUC");
         }
-    }//GEN-LAST:event_rbtCreditoActionPerformed
+    }//GEN-LAST:event_btnCuBuscarActionPerformed
 
-    private void txtMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontoKeyTyped
+    private void txtCedCuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedCuKeyTyped
         final char caracter = evt.getKeyChar();
-        if(((caracter < '0') || (caracter > '9')) && (caracter != '\b') && caracter != '.') {
-           evt.consume();
+        cmbDesCu.removeAllItems();
+        cuent = new Cuenta();
+        final String ced = txtCedCu.getText();
+        if(((caracter < '0') || (caracter > '9')) && (caracter != '\b') || ced.length() >= 13) {
+            evt.consume();
         }
-    }//GEN-LAST:event_txtMontoKeyTyped
+        if(ced.length() == 13 || ced.length() == 10) {
+            ArrayList<Cuenta> cuentArray = new ArrayList<Cuenta>();
+            cuentArray = cuent.buscarCuenta(ced);
+            if(cuentArray.size() > 0) {
+                for(int i = 0; i < cuentArray.size(); i++) {
+                    if(cuentArray.get(i).getEstado().equals("act"))
+                    cmbDesCu.addItem(cuentArray.get(i).getCodCuenta());
+                }
+            }
+            else  {
+                JOptionPane.showMessageDialog(rootPane, "Cliente no encontrado");
+            }
+        }
+    }//GEN-LAST:event_txtCedCuKeyTyped
+
+    private void btnNuevoMovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoMovActionPerformed
+        txtCedMov.setText("");
+        cmbCuentas.removeAllItems();
+        txtMonto.setText("");
+        final DefaultTableModel modelo = (DefaultTableModel) tabMovimiento.getModel();
+        modelo.setRowCount(0);
+    }//GEN-LAST:event_btnNuevoMovActionPerformed
 
     private void btnAgregarMovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarMovActionPerformed
         final Date fecha = new Date();
@@ -940,7 +931,7 @@ public class Principal extends javax.swing.JFrame {
         ArrayList<Cuenta> cuentA;
         ArrayList<Cuenta> cuentB;
         if(!txtCedMov.getText().equals("") || !cmbCuentas.getSelectedItem().equals("") ||
-                !txtMonto.getText().equals("")) {
+            !txtMonto.getText().equals("")) {
             float mont = 0, sald = 0;
             cuentA = new ArrayList<Cuenta>();
             cuentA = cuent.buscarCuenta(txtCedMov.getText(), cmbCuentas.getSelectedItem().toString());
@@ -959,7 +950,7 @@ public class Principal extends javax.swing.JFrame {
                         cuentB = new ArrayList<Cuenta>();
                         cuentB = cuent.buscarCuenta(txtCedMov.getText(), cmbCuentas.getSelectedItem().toString());
                         move = new Movimiento(cmbCuentas.getSelectedItem().toString(), "deb",
-                                fecha, mont, cuentB.get(0).getSaldo());
+                            fecha, mont, cuentB.get(0).getSaldo());
                         if(move.ingresarMovimiento(move) > 0) {
                             JOptionPane.showMessageDialog(rootPane, "Se ha ingresado correctamente");
                         }
@@ -1002,152 +993,232 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAgregarMovActionPerformed
 
-    private void btnNuevoMovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoMovActionPerformed
-        txtCedMov.setText("");
-        cmbCuentas.removeAllItems();
-        txtMonto.setText("");
-        final DefaultTableModel modelo = (DefaultTableModel) tabMovimiento.getModel();
-        modelo.setRowCount(0);
-    }//GEN-LAST:event_btnNuevoMovActionPerformed
-
-    private void txtCedMovConKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedMovConKeyTyped
-        cuent = new Cuenta();
-        cmbCuentasCon.removeAllItems();
+    private void txtMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontoKeyTyped
         final char caracter = evt.getKeyChar();
-        final String ced = txtCedMovCon.getText();
-        if(((caracter < '0') || (caracter > '9')) && (caracter != '\b') || ced.length() >= 13) {
-           evt.consume();
+        if(((caracter < '0') || (caracter > '9')) && (caracter != '\b') && caracter != '.') {
+            evt.consume();
         }
+    }//GEN-LAST:event_txtMontoKeyTyped
 
+    private void rbtCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtCreditoActionPerformed
+        if(rbtCredito.isSelected()) {
+            rbtDebito.setSelected(false);
+        }
+        else {
+            rbtDebito.setSelected(true);
+        }
+    }//GEN-LAST:event_rbtCreditoActionPerformed
+
+    private void rbtDebitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtDebitoActionPerformed
+        if(rbtDebito.isSelected()) {
+            rbtCredito.setSelected(false);
+        }
+        else {
+            rbtCredito.setSelected(true);
+        }
+    }//GEN-LAST:event_rbtDebitoActionPerformed
+
+    private void txtCedMovKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedMovKeyTyped
+        cuent = new Cuenta();
+        cmbCuentas.removeAllItems();
+        char caracter = evt.getKeyChar();
+        final String ced = txtCedMov.getText();
+        if(((caracter < '0') || (caracter > '9')) && (caracter != '\b') || ced.length() >= 13) {
+            evt.consume();
+        }
         if(ced.length() == 13 || ced.length() == 10) {
-            ArrayList<Cuenta> cuentArray = new ArrayList<Cuenta>();
-            cuentArray = cuent.buscarCuenta(ced);
-            if(cuentArray.size() > 0) {
-                for(int i = 0; i < cuentArray.size(); i++) {
-                    if(cuentArray.get(i).getEstado().equals("act")) {
-                        cmbCuentasCon.addItem(cuentArray.get(i).getCodCuenta());
+            ArrayList<Cuenta> aux = new ArrayList<Cuenta>();
+            aux = cuent.buscarCuenta(ced);
+            if(aux.size() > 0) {
+                for(int i = 0; i < aux.size(); i++) {
+                    if(aux.get(i).getEstado().equals("act"))
+                    cmbCuentas.addItem(aux.get(i).getCodCuenta());
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(rootPane, "Cliente no encontrado");
+            }
+        }
+    }//GEN-LAST:event_txtCedMovKeyTyped
+
+    private void btnLimpiarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarCuentaActionPerformed
+        txtNumCuenta.setText("");
+        txtCed.setText("");
+        txtSaldoInicial.setText("");
+    }//GEN-LAST:event_btnLimpiarCuentaActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        client = new Cliente();
+        String numCuenta;
+        if(txtCed.getText().equals("") || txtNumCuenta.getText().equals("") || txtSaldoInicial.getText().equals("")
+            || client.buscarClienteN(txtCed.getText())== false) {
+            JOptionPane.showMessageDialog(rootPane, "El cliente no existe o los datos son incompletos");
+        }
+        else {
+            numCuenta = txtNumCuenta.getText();
+            try {
+                if(cmbTipo.getSelectedItem().toString().equals("Ahorros")) {
+                    cuent = new Cuenta(txtNumCuenta.getText(), txtCed.getText(), "aho",
+                        "act", Float.parseFloat(txtSaldoInicial.getText()));
+                }
+                else {
+                    cuent = new Cuenta(txtNumCuenta.getText(), txtCed.getText(), "cor",
+                        "act", Float.parseFloat(txtSaldoInicial.getText()));
+                }
+                if((validarRuc(txtCed.getText()) || validacionRUC(txtCed.getText())) && numCuenta.length() == 8) {
+                    if(cuent.ingresarCu(cuent) > 0) {
+                        JOptionPane.showMessageDialog(rootPane, "Se guardo exitosamente");
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(rootPane, "Ha ocurrido un error, intente nuevamente");
                     }
                 }
-            }
-            else {
-                JOptionPane.showMessageDialog(rootPane, "Cliente no encontrado");
-            }
-        }
-    }//GEN-LAST:event_txtCedMovConKeyTyped
-
-    private void btnBuscarMovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMovActionPerformed
-        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        move = new Movimiento();
-        ArrayList<Movimiento> moveArray = new ArrayList<Movimiento>();
-        final Date dateStart = jDateChooser1.getDate();
-        final Date dateEnd = jDateChooser2.getDate();
-        if(!txtCedMovCon.getText().equals("") || !cmbCuentasCon.getSelectedItem().equals("")) {
-            String start = format.format(dateStart);
-            String end = format.format(dateEnd);
-            if(dateStart.before(dateEnd)) {
-                moveArray = move.buscarMovimientoFecha(cmbCuentasCon.getSelectedItem().toString(), dateStart, dateEnd);
-                final DefaultTableModel modelo = (DefaultTableModel) tabConMov.getModel();
-                modelo.setRowCount(0);
-                for (int i = 0; i < moveArray.size(); i++) {
-                    Object[] fila = new Object[6];
-                    final Movimiento move = moveArray.get(i);
-                    fila[0] = move.getCodMovimiento();
-                    fila[1] = move.getCuenta();
-                    fila[2] = move.getTipo();
-                    fila[3] = move.getFecha();
-                    fila[4] = move.getMonto();
-                    fila[5] = move.getSaldo();
-                    modelo.addRow(fila);
+                else {
+                    JOptionPane.showMessageDialog(rootPane, "RUC, cedula o Numero de Cuenta invalidos");
                 }
             }
-            else {
-                JOptionPane.showMessageDialog(rootPane, "Rango de Fechas invalido");
+            catch(Exception e) {
+                JOptionPane.showMessageDialog(rootPane, "Saldo Incorrecto");
+            }
+
+            final ArrayList<Cuenta> cuentArray = cuent.buscarCuenta(txtCed.getText());
+            final DefaultTableModel modelo = (DefaultTableModel) tabCuenta.getModel();
+            modelo.setRowCount(0);
+            for (int i = 0; i < cuentArray.size(); i++) {
+                Object[] fila = new Object[5];
+                final Cuenta cuent = cuentArray.get(i);
+                fila[0] = cuent.getCodCuenta();
+                fila[1] = cuent.getCedula();
+                fila[2] = cuent.getTipo();
+                fila[3] = cuent.getSaldo();
+                fila[4] = cuent.getEstado();
+                modelo.addRow(fila);
             }
         }
-        else {
-            JOptionPane.showMessageDialog(rootPane, "Ingrese datos Correctos");
-        }
-    }//GEN-LAST:event_btnBuscarMovActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        txtCedMovCon.setText("");
-        cmbCuentasCon.removeAllItems();
-        final DefaultTableModel modelo = (DefaultTableModel) tabConMov.getModel();
-        modelo.setRowCount(0);
-    }//GEN-LAST:event_btnNuevoActionPerformed
-
-    private void btnCuBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuBuscarActionPerformed
-        cuent = new Cuenta();
-        ArrayList<Cuenta> cuentArray = new ArrayList<Cuenta>();
-        if(!txtCedCu.getText().equals("")) {
-            cuentArray = cuent.buscarCuenta(txtCedCu.getText());
-            if(cuentArray.size() > 0) {
-                DefaultTableModel modelo = (DefaultTableModel) tabCuenta1.getModel();
-                modelo.setRowCount(0);
-                for (int i = 0; i < cuentArray.size(); i++) {
-                    Object[] fila = new Object[5];
-                    final Cuenta cuent = cuentArray.get(i);
-                    fila[0] = cuent.getCodCuenta();
-                    fila[1] = cuent.getCedula();
-                    fila[2] = cuent.getTipo();
-                    fila[3] = cuent.getSaldo();
-                    fila[4] = cuent.getEstado();
-                    modelo.addRow(fila);
-                }
-            }
-            else {
-                JOptionPane.showMessageDialog(rootPane, "Cliente no encontrado");
-            }
-        }
-        else {
-            JOptionPane.showMessageDialog(rootPane, "Ingrese una cedula o RUC");
-        }
-    }//GEN-LAST:event_btnCuBuscarActionPerformed
-
-    private void txtCedCuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedCuKeyTyped
+    private void txtSaldoInicialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSaldoInicialKeyTyped
         final char caracter = evt.getKeyChar();
-        cmbDesCu.removeAllItems();
-        cuent = new Cuenta();
-        final String ced = txtCedCu.getText();
+        final String ced = txtCedula.getText();
+        if(((caracter < '0') || (caracter > '9')) && (caracter != '\b') && caracter != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtSaldoInicialKeyTyped
+
+    private void txtNumCuentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumCuentaKeyTyped
+        final char caracter = evt.getKeyChar();
+        final String ced = txtNumCuenta.getText();
+        if(((caracter < '0') || (caracter > '9')) && (caracter != '\b') || ced.length() >= 8) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNumCuentaKeyTyped
+
+    private void txtCedKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedKeyTyped
+        final char caracter = evt.getKeyChar();
+        final String ced = txtCed.getText();
         if(((caracter < '0') || (caracter > '9')) && (caracter != '\b') || ced.length() >= 13) {
-           evt.consume();
+            evt.consume();
         }
-        if(ced.length() == 13 || ced.length() == 10) {
-            ArrayList<Cuenta> cuentArray = new ArrayList<Cuenta>();
-            cuentArray = cuent.buscarCuenta(ced);
-            if(cuentArray.size() > 0) {
-                for(int i = 0; i < cuentArray.size(); i++) {
-                    if(cuentArray.get(i).getEstado().equals("act"))
-                        cmbDesCu.addItem(cuentArray.get(i).getCodCuenta());
-                }
-            }
-            else  {
-                JOptionPane.showMessageDialog(rootPane, "Cliente no encontrado");
-            }
-        }
-    }//GEN-LAST:event_txtCedCuKeyTyped
+    }//GEN-LAST:event_txtCedKeyTyped
 
-    private void btnCuNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuNuevoActionPerformed
-        txtCedCu.setText("");
-        cmbDesCu.removeAllItems();
-        final DefaultTableModel modelo = (DefaultTableModel) tabCuenta1.getModel();
-        modelo.setRowCount(0);
-    }//GEN-LAST:event_btnCuNuevoActionPerformed
-
-    private void btnDesCuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesCuActionPerformed
-        cuent = new Cuenta();
-        if(!txtCedCu.getText().equals("") && !cmbDesCu.getSelectedItem().toString().equals("")) {
-            if(JOptionPane.showConfirmDialog(rootPane, "Esta seguro que desae desabilitar la cuenta con"
-                    + " el numero" + cmbDesCu.getSelectedItem().toString() +", no prodra vovlver a usarla") == 0) {
-                if(cuent.actualizarCuenta(cmbDesCu.getSelectedItem().toString()) > 0) {
-                    JOptionPane.showMessageDialog(rootPane, "Se ha desabilitado correctamente");
-                }
-            }
+    private void rbtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtBuscarActionPerformed
+        if(rbtBuscar.isSelected()) {
+            rbtCrear.setSelected(false);
+            btnCrear.setEnabled(false);
+            btnBuscar.setEnabled(true);
+            txtNombre.setEnabled(false);
+            txtNombre.setText("");
         }
         else {
-            JOptionPane.showMessageDialog(rootPane, "Debe seleccionar una cuenta");
+            rbtCrear.setSelected(true);
+            btnBuscar.setEnabled(false);
+            btnCrear.setEnabled(true);
+            txtNombre.setEnabled(true);
         }
-    }//GEN-LAST:event_btnDesCuActionPerformed
+    }//GEN-LAST:event_rbtBuscarActionPerformed
+
+    private void rbtCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtCrearActionPerformed
+        if(rbtCrear.isSelected()) {
+            rbtBuscar.setSelected(false);
+            btnBuscar.setEnabled(false);
+            btnCrear.setEnabled(true);
+            txtNombre.setEnabled(true);
+        }
+        else {
+            rbtBuscar.setSelected(true);
+            btnCrear.setEnabled(false);
+            btnBuscar.setEnabled(true);
+            txtNombre.setEnabled(false);
+            txtNombre.setText("");
+        }
+    }//GEN-LAST:event_rbtCrearActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        // TODO add your handling code here:
+        txtNombre.setText("");
+        txtCedula.setText("");
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        if(validarRuc(txtCedula.getText()) == false && validacionRUC(txtCedula.getText()) == false) {
+            JOptionPane.showMessageDialog(rootPane, "Ingrese la cedula o RUC correctos");
+        }
+        else {
+            client = new Cliente();
+            final ArrayList<Cliente> clientArray = client.buscarCliente(txtCedula.getText());
+            final DefaultTableModel modelo = (DefaultTableModel) tabCliente.getModel();
+            modelo.setRowCount(0);
+            for (int i = 0; i < clientArray.size(); i++) {
+                Object[] fila = new Object[2];
+                final Cliente client = clientArray.get(i);
+                fila[0] = client.getCedula();
+                fila[1] = client.getNombre();
+                modelo.addRow(fila);
+            }
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+        client = new Cliente(txtCedula.getText(), txtNombre.getText());
+        if(txtCedula.getText().equals("") || txtNombre.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Ingrese los datos Completos");
+        }
+        else {
+            if(validarRuc(txtCedula.getText()) || validacionRUC(txtCedula.getText())) {
+                if(client.ingresarCliente(client) > 0){
+                    JOptionPane.showMessageDialog(rootPane, "Se guardo exitosamente");
+                }
+                else {
+                    JOptionPane.showMessageDialog(rootPane, "Ha ocurrido un error, intente nuevamente");
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(rootPane, "RUC o cedula invalidos");
+            }
+            final ArrayList<Cliente> clientArray = client.buscarCliente(txtCedula.getText());
+            final DefaultTableModel modelo = (DefaultTableModel) tabCliente.getModel();
+            modelo.setRowCount(0);
+            for (int i = 0; i < clientArray.size(); i++) {
+                Object[] fila = new Object[2];
+                final Cliente client = clientArray.get(i);
+                fila[0] = client.getCedula();
+                fila[1] = client.getNombre();
+                modelo.addRow(fila);
+            }
+        }
+    }//GEN-LAST:event_btnCrearActionPerformed
+
+    private void txtCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyTyped
+        final char caracter = evt.getKeyChar();
+        String ced = txtCedula.getText();
+        if(((caracter < '0') || (caracter > '9')) && (caracter != '\b') || ced.length() >= 13) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCedulaKeyTyped
+
+    private void txtCedula1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedula1KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCedula1KeyTyped
 
     public static boolean validarRuc(final String ced) {
         boolean isValid = false;
@@ -1285,6 +1356,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbCuentasCon;
     private javax.swing.JComboBox<String> cmbDesCu;
     private javax.swing.JComboBox<String> cmbTipo;
+    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
@@ -1293,6 +1365,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1306,11 +1379,14 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JTable jTable1;
     private javax.swing.JRadioButton rbtBuscar;
     private javax.swing.JRadioButton rbtCrear;
     private javax.swing.JRadioButton rbtCredito;
@@ -1326,6 +1402,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField txtCedMov;
     private javax.swing.JTextField txtCedMovCon;
     private javax.swing.JTextField txtCedula;
+    private javax.swing.JTextField txtCedula1;
     private javax.swing.JTextField txtMonto;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNumCuenta;
